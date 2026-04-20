@@ -7,591 +7,382 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #f5f5f3;
-      --surface: #ffffff;
-      --surface2: #f5f5f3;
-      --border: rgba(0,0,0,0.12);
-      --border2: rgba(0,0,0,0.22);
-      --text: #1a1a1a;
-      --text2: #555;
-      --text3: #999;
-      --blue: #185FA5;
-      --blue-dark: #0C447C;
-      --blue-light: #E6F1FB;
-      --green: #3B6D11;
-      --green-light: #EAF3DE;
-      --red: #A32D2D;
-      --red-light: #FCEBEB;
-      --radius: 10px;
-      --radius-sm: 7px;
+      --bg:#f5f5f3;--surface:#fff;--surface2:#f5f5f3;
+      --border:rgba(0,0,0,0.11);--border2:rgba(0,0,0,0.2);
+      --text:#1a1a1a;--text2:#555;--text3:#999;
+      --blue:#185FA5;--blue-dark:#0C447C;--blue-light:#E6F1FB;
+      --green:#3B6D11;--green-light:#EAF3DE;
+      --red:#A32D2D;--red-light:#FCEBEB;
+      --amber:#854F0B;--amber-light:#FAEEDA;
+      --r:10px;--rs:7px;
     }
+    @media(prefers-color-scheme:dark){:root{
+      --bg:#1a1a1a;--surface:#242424;--surface2:#2e2e2e;
+      --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2);
+      --text:#f0f0f0;--text2:#aaa;--text3:#666;
+      --blue-light:#0C447C40;--green-light:#3B6D1130;--red-light:#A32D2D30;--amber-light:#854F0B30;
+    }}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1rem;}
+    .container{max-width:720px;margin:0 auto;}
+    header{margin-bottom:1.75rem;}
+    header h1{font-size:22px;font-weight:600;margin-bottom:4px;}
+    header p{font-size:14px;color:var(--text2);}
+    .card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;}
+    .card-title{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1rem;}
+    label{display:block;font-size:13px;color:var(--text2);margin-bottom:5px;}
+    input,select,textarea{font-family:inherit;font-size:14px;color:var(--text);background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--rs);padding:8px 12px;width:100%;outline:none;transition:border-color .15s,box-shadow .15s;}
+    input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24,95,165,.1);}
+    select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px;appearance:none;}
+    textarea{resize:vertical;min-height:90px;line-height:1.6;}
+    .btn{font-family:inherit;font-size:13px;font-weight:500;padding:7px 14px;border-radius:var(--rs);border:0.5px solid var(--border2);background:transparent;color:var(--text);cursor:pointer;transition:background .15s;white-space:nowrap;}
+    .btn:hover{background:var(--surface2);}
+    .btn:disabled{opacity:.45;cursor:not-allowed;}
+    .btn-primary{background:var(--blue);color:#fff;border-color:var(--blue);font-size:14px;padding:10px 24px;}
+    .btn-primary:hover{background:var(--blue-dark);border-color:var(--blue-dark);}
+    .btn-icon{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border:0.5px solid var(--border);border-radius:var(--rs);background:transparent;cursor:pointer;font-size:13px;color:var(--text2);transition:background .15s;font-family:inherit;flex-shrink:0;}
+    .btn-icon:hover{background:var(--surface2);}
+    .badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 9px;border-radius:20px;background:var(--blue-light);color:var(--blue);}
+    .badge-green{background:var(--green-light);color:var(--green);}
+    .badge-amber{background:var(--amber-light);color:var(--amber);}
+    .flex{display:flex;align-items:center;gap:8px;}
+    .spacer{flex:1;}
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #1a1a1a;
-        --surface: #242424;
-        --surface2: #2e2e2e;
-        --border: rgba(255,255,255,0.1);
-        --border2: rgba(255,255,255,0.2);
-        --text: #f0f0f0;
-        --text2: #aaa;
-        --text3: #666;
-        --blue-light: #0C447C40;
-        --green-light: #3B6D1130;
-        --red-light: #A32D2D30;
-      }
-    }
+    /* Saved schemas */
+    .saved-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+    .saved-chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:4px 10px;border-radius:20px;border:0.5px solid var(--border2);background:var(--surface2);cursor:pointer;transition:all .15s;}
+    .saved-chip:hover{border-color:var(--blue);color:var(--blue);}
+    .saved-chip .chip-del{font-size:10px;color:var(--text3);margin-left:2px;}
+    .saved-chip .chip-del:hover{color:var(--red);}
+    .save-row{display:flex;gap:6px;align-items:center;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border);}
+    .save-row input{font-size:13px;padding:6px 10px;}
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 2rem 1rem;
-    }
-
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    header {
-      margin-bottom: 2rem;
-    }
-
-    header h1 {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    header p {
-      font-size: 14px;
-      color: var(--text2);
-    }
-
-    .card {
-      background: var(--surface);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-    }
-
-    .card-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text2);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 1rem;
-    }
-
-    label {
-      display: block;
-      font-size: 13px;
-      color: var(--text2);
-      margin-bottom: 5px;
-    }
-
-    input, select, textarea {
-      font-family: inherit;
-      font-size: 14px;
-      color: var(--text);
-      background: var(--surface2);
-      border: 0.5px solid var(--border2);
-      border-radius: var(--radius-sm);
-      padding: 9px 12px;
-      width: 100%;
-      outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
-      appearance: none;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(24,95,165,0.12);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 90px;
-      line-height: 1.6;
-    }
-
-    select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      padding-right: 30px;
-    }
-
-    .btn {
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 8px 16px;
-      border-radius: var(--radius-sm);
-      border: 0.5px solid var(--border2);
-      background: transparent;
-      color: var(--text);
-      cursor: pointer;
-      transition: background 0.15s, opacity 0.15s;
-      white-space: nowrap;
-    }
-    .btn:hover { background: var(--surface2); }
-    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-
-    .btn-primary {
-      background: var(--blue);
-      color: #fff;
-      border-color: var(--blue);
-      font-size: 14px;
-      padding: 10px 24px;
-    }
-    .btn-primary:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
-
-    .btn-icon {
-      width: 32px; height: 32px;
-      display: inline-flex; align-items: center; justify-content: center;
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: transparent;
-      cursor: pointer;
-      font-size: 13px;
-      color: var(--text2);
-      transition: background 0.15s;
-      font-family: inherit;
-    }
-    .btn-icon:hover { background: var(--surface2); }
-
-    /* Tabs */
-    .tabs { display: flex; gap: 4px; margin-bottom: 14px; }
-    .tab {
-      font-family: inherit; font-size: 13px; padding: 7px 16px;
-      border-radius: var(--radius-sm); border: 0.5px solid var(--border);
-      cursor: pointer; background: transparent; color: var(--text2);
-      transition: all 0.15s;
-    }
-    .tab.active { background: var(--blue); color: #fff; border-color: var(--blue); }
-
-    /* Drop zone */
-    .drop-zone {
-      border: 1.5px dashed var(--border2);
-      border-radius: var(--radius-sm);
-      padding: 24px 16px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.15s;
-      background: var(--surface2);
-      margin-bottom: 10px;
-    }
-    .drop-zone:hover, .drop-zone.drag-over {
-      border-color: var(--blue);
-      background: var(--blue-light);
-    }
-    .drop-zone .dz-icon { font-size: 28px; margin-bottom: 8px; }
-    .drop-zone p { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
-    .drop-zone small { font-size: 12px; color: var(--text3); }
-
-    /* Schema grid */
-    .schema-header, .schema-row-grid {
-      display: grid;
-      grid-template-columns: 1fr 150px 34px;
-      gap: 6px;
-      align-items: center;
-      margin-bottom: 5px;
-    }
-    .schema-header span { font-size: 12px; color: var(--text3); }
-
-    /* Badge */
-    .badge {
-      display: inline-block;
-      font-size: 11px; font-weight: 500;
-      padding: 2px 9px;
-      border-radius: 20px;
-      background: var(--blue-light);
-      color: var(--blue);
-    }
-    .badge-green { background: var(--green-light); color: var(--green); }
-
-    /* Notice */
-    .notice {
-      font-size: 12px;
-      padding: 7px 12px;
-      border-radius: var(--radius-sm);
-      margin-bottom: 10px;
-      display: none;
-    }
+    /* Table blocks */
+    .table-block{border:0.5px solid var(--border2);border-radius:var(--r);margin-bottom:12px;overflow:hidden;}
+    .table-block-header{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--surface2);border-bottom:0.5px solid var(--border);cursor:pointer;user-select:none;}
+    .table-block-header:hover{background:var(--bg);}
+    .table-num{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .table-name-display{font-size:14px;font-weight:500;flex:1;}
+    .table-name-display.empty{color:var(--text3);font-style:italic;}
+    .chevron{font-size:10px;color:var(--text3);transition:transform .2s;}
+    .chevron.open{transform:rotate(180deg);}
+    .table-block-body{padding:14px;display:none;}
+    .table-block-body.open{display:block;}
+    .schema-header,.schema-row-grid{display:grid;grid-template-columns:1fr 150px 30px;gap:6px;align-items:center;margin-bottom:5px;}
+    .schema-header span{font-size:12px;color:var(--text3);}
+    .tabs{display:flex;gap:4px;margin-bottom:12px;}
+    .tab{font-family:inherit;font-size:12px;padding:6px 14px;border-radius:var(--rs);border:0.5px solid var(--border);cursor:pointer;background:transparent;color:var(--text2);transition:all .15s;}
+    .tab.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+    .drop-zone{border:1.5px dashed var(--border2);border-radius:var(--rs);padding:18px;text-align:center;cursor:pointer;transition:all .15s;background:var(--surface2);margin-bottom:8px;}
+    .drop-zone:hover,.drop-zone.drag-over{border-color:var(--blue);background:var(--blue-light);}
+    .drop-zone p{font-size:13px;color:var(--text2);margin-bottom:3px;}
+    .drop-zone small{font-size:12px;color:var(--text3);}
+    .notice{font-size:12px;padding:6px 10px;border-radius:var(--rs);margin-bottom:8px;}
 
     /* Output */
-    .output-box {
-      background: var(--surface2);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 1rem;
-      font-family: "SF Mono", "Fira Code", monospace;
-      font-size: 13px;
-      line-height: 1.75;
-      color: var(--text);
-      white-space: pre-wrap;
-      word-break: break-word;
-      min-height: 64px;
-    }
+    .output-box{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--rs);padding:1rem;font-family:"SF Mono","Fira Code",monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;word-break:break-word;min-height:64px;}
+    .empty-state{color:var(--text3);font-style:italic;font-size:13px;font-family:inherit;}
+    .explanation{font-size:13px;color:var(--text2);line-height:1.6;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border);}
+    .dots{display:inline-flex;gap:4px;align-items:center;}
+    .dots span{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:blink 1.2s infinite;}
+    .dots span:nth-child(2){animation-delay:.2s}.dots span:nth-child(3){animation-delay:.4s}
+    @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
 
-    .empty-state { color: var(--text3); font-family: inherit; font-style: italic; font-size: 13px; }
+    .add-table-btn{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--blue);background:none;border:1.5px dashed var(--border2);border-radius:var(--r);padding:10px 16px;cursor:pointer;font-family:inherit;transition:all .15s;width:100%;justify-content:center;margin-bottom:4px;}
+    .add-table-btn:hover{border-color:var(--blue);background:var(--blue-light);}
 
-    .explanation {
-      font-size: 13px; color: var(--text2);
-      line-height: 1.6; margin-top: 10px;
-      padding-top: 10px;
-      border-top: 0.5px solid var(--border);
-    }
+    /* Config notice */
+    .config-notice{background:var(--amber-light);border:0.5px solid var(--amber);border-radius:var(--rs);padding:10px 14px;font-size:13px;color:var(--amber);margin-bottom:1rem;display:none;}
 
-    /* Loading dots */
-    .dots { display: inline-flex; gap: 4px; align-items: center; }
-    .dots span {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--blue);
-      animation: blink 1.2s infinite;
-    }
-    .dots span:nth-child(2) { animation-delay: 0.2s; }
-    .dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes blink { 0%,80%,100%{opacity:0.2} 40%{opacity:1} }
-
-    /* API key section */
-    .api-key-bar {
-      background: var(--surface);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem 1.25rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .api-key-bar label { margin-bottom: 0; white-space: nowrap; font-size: 13px; }
-    .api-key-bar input { font-family: monospace; font-size: 13px; }
-
-    .row-flex { display: flex; align-items: center; gap: 8px; }
-    .spacer { flex: 1; }
-
-    /* Sheet selector */
-    #sheetSelector { display: none; margin-bottom: 10px; }
-
-    footer {
-      text-align: center;
-      font-size: 12px;
-      color: var(--text3);
-      margin-top: 2rem;
-    }
+    footer{text-align:center;font-size:12px;color:var(--text3);margin-top:2rem;}
   </style>
 </head>
 <body>
 <div class="container">
-
   <header>
     <h1>BigQuery SQL Generator</h1>
-    <p>Nhập schema → Mô tả yêu cầu → Nhận câu SQL BigQuery ngay lập tức</p>
+    <p>Định nghĩa schema nhiều bảng → Mô tả yêu cầu → Nhận SQL BigQuery với JOIN tự động</p>
   </header>
 
-  <!-- API Key -->
-  <div class="api-key-bar">
-    <label for="apiKey">🔑 Anthropic API Key</label>
-    <input type="password" id="apiKey" placeholder="sk-ant-..." style="flex:1">
-    <a href="https://console.anthropic.com/settings/keys" target="_blank" style="font-size:12px;color:var(--blue);white-space:nowrap;text-decoration:none">Lấy API key ↗</a>
+  <div class="config-notice" id="configNotice">
+    ⚠ Chưa cấu hình Worker URL. Mở file <code>index.html</code>, tìm dòng <code>WORKER_URL</code> và thay bằng URL Cloudflare Worker của bạn.
   </div>
 
-  <!-- Bảng & Schema -->
+  <!-- Saved schemas -->
   <div class="card">
-    <div class="card-title">Bảng &amp; Schema</div>
-
-    <label for="tableName">Tên bảng</label>
-    <input type="text" id="tableName" placeholder="vd: project.dataset.orders" style="margin-bottom:16px">
-
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('import')">📊 Import từ Excel</button>
-      <button class="tab" onclick="switchTab('manual')">✏️ Nhập thủ công</button>
+    <div class="flex" style="margin-bottom:10px">
+      <span class="card-title" style="margin-bottom:0">Schema đã lưu</span>
+      <span class="spacer"></span>
+      <span style="font-size:12px;color:var(--text3)" id="savedCount">0 schema</span>
     </div>
-
-    <!-- Import tab -->
-    <div id="tab-import">
-      <div class="drop-zone" id="dropZone"
-           onclick="document.getElementById('fileInput').click()"
-           ondragover="onDragOver(event)"
-           ondragleave="onDragLeave(event)"
-           ondrop="onDrop(event)">
-        <div class="dz-icon">📂</div>
-        <p>Kéo thả file vào đây hoặc <strong>click để chọn</strong></p>
-        <small>.xlsx &nbsp;·&nbsp; .xls &nbsp;·&nbsp; .csv &nbsp;—&nbsp; Hàng đầu là tên cột, hàng 2 là dữ liệu mẫu (tuỳ chọn)</small>
-      </div>
-      <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFile(event)">
-
-      <div class="notice" id="importNotice"></div>
-
-      <div id="sheetSelector">
-        <label for="sheetSelect">Chọn sheet</label>
-        <select id="sheetSelect" onchange="loadSheet()"></select>
-      </div>
+    <div class="saved-list" id="savedList">
+      <span style="font-size:13px;color:var(--text3);font-style:italic">Chưa có schema nào được lưu</span>
     </div>
-
-    <!-- Schema rows (shared) -->
-    <div id="schemaSection" style="display:none; margin-top:4px">
-      <div class="schema-header">
-        <span>Tên cột</span>
-        <span>Kiểu dữ liệu BQ</span>
-        <span></span>
-      </div>
-      <div id="schemaRows"></div>
-      <div class="row-flex" style="margin-top:8px">
-        <button class="btn" onclick="addColumn()">+ Thêm cột</button>
-        <span class="badge" id="colCount">0 cột</span>
-      </div>
-    </div>
-
-    <!-- Manual empty state -->
-    <div id="manualEmpty" style="display:none; margin-top:4px">
-      <button class="btn" onclick="addColumn()">+ Thêm cột</button>
+    <div class="save-row">
+      <input type="text" id="saveName" placeholder="Đặt tên schema hiện tại... vd: Bảng Orders + Customers" style="flex:1">
+      <button class="btn" onclick="saveSchema()">💾 Lưu</button>
     </div>
   </div>
 
-  <!-- Yêu cầu -->
+  <!-- Tables -->
+  <div class="card">
+    <div class="flex" style="margin-bottom:1rem">
+      <span class="card-title" style="margin-bottom:0">Các bảng</span>
+      <span class="spacer"></span>
+      <span class="badge badge-amber" id="tableCount">1 bảng</span>
+    </div>
+    <div id="tableList"></div>
+    <button class="add-table-btn" onclick="addTable()">+ Thêm bảng</button>
+  </div>
+
+  <!-- Query -->
   <div class="card">
     <div class="card-title">Yêu cầu truy vấn</div>
-    <textarea id="queryReq" placeholder="vd: Lấy tổng doanh thu theo từng tháng trong năm 2024, sắp xếp theo tháng tăng dần, chỉ lấy những tháng có doanh thu trên 10 triệu..."></textarea>
-    <div class="row-flex" style="margin-top:12px; justify-content:flex-end">
+    <textarea id="queryReq" placeholder="vd: Lấy danh sách khách hàng cùng tổng đơn hàng, chỉ lấy khách có tổng tiền trên 1 triệu trong năm 2024..."></textarea>
+    <div class="flex" style="margin-top:12px;justify-content:flex-end">
       <button class="btn btn-primary" id="generateBtn" onclick="generateSQL()">Sinh SQL ↗</button>
     </div>
   </div>
 
-  <!-- Kết quả -->
+  <!-- Output -->
   <div class="card">
-    <div class="row-flex" style="margin-bottom:12px">
+    <div class="flex" style="margin-bottom:12px">
       <span class="card-title" style="margin-bottom:0">Kết quả SQL</span>
       <span class="badge badge-green" style="margin-left:6px">BigQuery</span>
       <span class="spacer"></span>
-      <button class="btn-icon" id="copyBtn" onclick="copySQL()" title="Copy SQL">📋</button>
+      <button class="btn-icon" id="copyBtn" onclick="copySQL()">📋</button>
     </div>
     <div class="output-box" id="sqlOutput"><span class="empty-state">Câu SQL sẽ hiển thị ở đây...</span></div>
     <div class="explanation" id="explanation" style="display:none"></div>
   </div>
 
-  <footer>Powered by Claude (Anthropic) &nbsp;·&nbsp; BigQuery SQL Generator</footer>
+  <footer>Powered by Claude (Anthropic) · BigQuery SQL Generator</footer>
 </div>
 
 <script>
-const BQ_TYPES = ["STRING","INT64","FLOAT64","NUMERIC","BOOL","DATE","DATETIME","TIMESTAMP","BYTES","ARRAY<STRING>","JSON","STRUCT"];
-let columns = [];
-let workbook = null;
-let currentTab = "import";
+// ============================================================
+// CẤU HÌNH — thay WORKER_URL bằng URL Cloudflare Worker của bạn
+// Ví dụ: "https://bq-proxy.ten-ban.workers.dev"
+const WORKER_URL = "REPLACE_WITH_YOUR_WORKER_URL";
+// ============================================================
 
-/* ---------- Tabs ---------- */
-function switchTab(tab) {
-  currentTab = tab;
-  document.querySelectorAll(".tab").forEach((t, i) => {
-    t.classList.toggle("active", (i===0 && tab==="import") || (i===1 && tab==="manual"));
-  });
-  document.getElementById("tab-import").style.display = tab === "import" ? "block" : "none";
-  document.getElementById("manualEmpty").style.display = (tab === "manual" && columns.length === 0) ? "block" : "none";
-  if (columns.length > 0) showSchemaSection();
-}
+const BQ_TYPES=["STRING","INT64","FLOAT64","NUMERIC","BOOL","DATE","DATETIME","TIMESTAMP","BYTES","ARRAY<STRING>","JSON","STRUCT"];
+const LS_KEY = "bq_saved_schemas";
+let tables=[], tidx=0;
 
-/* ---------- Drop zone ---------- */
-function onDragOver(e) { e.preventDefault(); document.getElementById("dropZone").classList.add("drag-over"); }
-function onDragLeave()  { document.getElementById("dropZone").classList.remove("drag-over"); }
-function onDrop(e) {
-  e.preventDefault();
-  document.getElementById("dropZone").classList.remove("drag-over");
-  const f = e.dataTransfer.files[0];
-  if (f) processFile(f);
-}
-function handleFile(e) { const f = e.target.files[0]; if (f) processFile(f); }
+// ---- Saved schemas ----
+function getSaved(){try{return JSON.parse(localStorage.getItem(LS_KEY)||"[]");}catch{return[];}}
+function setSaved(arr){localStorage.setItem(LS_KEY,JSON.stringify(arr));}
 
-function processFile(file) {
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const data = new Uint8Array(e.target.result);
-      workbook = XLSX.read(data, { type: "array" });
-      const sel = document.getElementById("sheetSelect");
-      sel.innerHTML = workbook.SheetNames.map(n => `<option>${n}</option>`).join("");
-      document.getElementById("sheetSelector").style.display = workbook.SheetNames.length > 1 ? "block" : "none";
-      loadSheet();
-      document.getElementById("dropZone").querySelector("p").innerHTML =
-        `<strong>${file.name}</strong> — đã tải lên thành công`;
-    } catch(err) {
-      showNotice("❌ Không đọc được file: " + err.message, "var(--red)", "var(--red-light)");
-    }
-  };
-  reader.readAsArrayBuffer(file);
-}
-
-function loadSheet() {
-  if (!workbook) return;
-  const name = document.getElementById("sheetSelect").value || workbook.SheetNames[0];
-  const sheet = workbook.Sheets[name];
-  const json = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" });
-  if (!json.length) { showNotice("Sheet trống", "var(--red)", "var(--red-light)"); return; }
-  const headers = json[0].map(h => String(h).trim()).filter(Boolean);
-  const dataRows = json.slice(1);
-  columns = headers.map((name, i) => ({
-    id: Date.now() + i,
-    name,
-    type: inferBQType(dataRows.map(r => r[i]))
-  }));
-  showSchemaSection();
-  showNotice(`✓ Đã import ${columns.length} cột từ sheet "${name}"`, "var(--green)", "var(--green-light)");
-}
-
-function inferBQType(values) {
-  const sample = values.filter(v => v != null && v !== "");
-  if (!sample.length) return "STRING";
-  if (sample.every(v => !isNaN(Number(v)))) {
-    return sample.every(v => Number.isInteger(Number(v))) ? "INT64" : "FLOAT64";
+function renderSaved(){
+  const saved=getSaved();
+  const list=document.getElementById("savedList");
+  const cnt=document.getElementById("savedCount");
+  cnt.textContent=saved.length+" schema";
+  if(!saved.length){
+    list.innerHTML='<span style="font-size:13px;color:var(--text3);font-style:italic">Chưa có schema nào được lưu</span>';
+    return;
   }
-  if (sample.every(v => /^\d{4}-\d{2}-\d{2}$/.test(String(v)))) return "DATE";
-  if (sample.every(v => /^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}/.test(String(v)))) return "TIMESTAMP";
-  if (sample.every(v => ["true","false","1","0","yes","no"].includes(String(v).toLowerCase()))) return "BOOL";
-  return "STRING";
-}
-
-function showNotice(msg, color, bg) {
-  const el = document.getElementById("importNotice");
-  el.textContent = msg;
-  el.style.color = color;
-  el.style.background = bg;
-  el.style.display = "block";
-}
-
-/* ---------- Schema ---------- */
-function showSchemaSection() {
-  document.getElementById("schemaSection").style.display = "block";
-  document.getElementById("manualEmpty").style.display = "none";
-  renderSchema();
-}
-
-function addColumn() {
-  columns.push({ id: Date.now(), name: "", type: "STRING" });
-  showSchemaSection();
-}
-
-function removeColumn(id) {
-  columns = columns.filter(c => c.id !== id);
-  if (columns.length === 0) {
-    document.getElementById("schemaSection").style.display = "none";
-    if (currentTab === "manual") document.getElementById("manualEmpty").style.display = "block";
-  } else {
-    renderSchema();
-  }
-}
-
-function updateCol(id, field, val) {
-  const c = columns.find(c => c.id === id);
-  if (c) c[field] = val;
-}
-
-function renderSchema() {
-  document.getElementById("colCount").textContent = columns.length + " cột";
-  document.getElementById("schemaRows").innerHTML = columns.map(c => `
-    <div class="schema-row-grid">
-      <input type="text" placeholder="tên_cột" value="${escHtml(c.name)}" oninput="updateCol(${c.id},'name',this.value)">
-      <select onchange="updateCol(${c.id},'type',this.value)">
-        ${BQ_TYPES.map(t => `<option value="${t}"${t === c.type ? " selected" : ""}>${t}</option>`).join("")}
-      </select>
-      <button class="btn-icon" onclick="removeColumn(${c.id})" style="color:var(--red);border-color:transparent">✕</button>
+  list.innerHTML=saved.map((s,i)=>`
+    <div class="saved-chip" onclick="loadSchema(${i})">
+      📋 ${esc(s.name)}
+      <span class="chip-del" onclick="event.stopPropagation();deleteSchema(${i})">✕</span>
     </div>`).join("");
 }
 
-function escHtml(s) { return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;"); }
-
-/* ---------- Generate SQL ---------- */
-async function generateSQL() {
-  const apiKey = document.getElementById("apiKey").value.trim();
-  const tableName = document.getElementById("tableName").value.trim();
-  const req = document.getElementById("queryReq").value.trim();
-  const btn = document.getElementById("generateBtn");
-  const outputEl = document.getElementById("sqlOutput");
-  const expEl = document.getElementById("explanation");
-
-  if (!apiKey) { outputEl.innerHTML = '<span style="color:var(--red)">⚠ Vui lòng nhập Anthropic API Key</span>'; return; }
-  if (!tableName) { outputEl.innerHTML = '<span style="color:var(--red)">⚠ Vui lòng nhập tên bảng</span>'; return; }
-  if (!columns.length) { outputEl.innerHTML = '<span style="color:var(--red)">⚠ Vui lòng thêm ít nhất một cột</span>'; return; }
-  if (!req) { outputEl.innerHTML = '<span style="color:var(--red)">⚠ Vui lòng nhập yêu cầu truy vấn</span>'; return; }
-
-  btn.disabled = true;
-  btn.textContent = "Đang xử lý...";
-  outputEl.innerHTML = '<div class="dots"><span></span><span></span><span></span></div>';
-  expEl.style.display = "none";
-
-  const schemaText = columns.map(c => `  ${c.name || "(unnamed)"} ${c.type}`).join(",\n");
-  const prompt = `Bạn là chuyên gia Google BigQuery SQL. Sinh câu SQL BigQuery chuẩn theo yêu cầu sau.
-
-SCHEMA:
-Tên bảng: \`${tableName}\`
-Cột:
-${schemaText}
-
-YÊU CẦU: ${req}
-
-Trả về JSON duy nhất (không có text hay markdown bao ngoài):
-{"sql":"câu SQL đầy đủ","explanation":"giải thích ngắn bằng tiếng Việt 2-3 câu"}
-
-Lưu ý: dùng cú pháp BigQuery chuẩn, backtick cho tên bảng/cột, hàm BQ phù hợp (DATE_TRUNC, FORMAT_DATE...).`;
-
-  try {
-    const resp = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-        "anthropic-dangerous-direct-browser-access": "true"
-      },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        messages: [{ role: "user", content: prompt }]
-      })
-    });
-
-    if (!resp.ok) {
-      const err = await resp.json().catch(()=>({error:{message:resp.statusText}}));
-      outputEl.innerHTML = `<span style="color:var(--red)">❌ API lỗi: ${err.error?.message || resp.status}</span>`;
-      return;
-    }
-
-    const data = await resp.json();
-    const text = data.content.map(i => i.text || "").join("");
-    const clean = text.replace(/```json|```/g, "").trim();
-    let parsed;
-    try { parsed = JSON.parse(clean); } catch { parsed = { sql: clean, explanation: "" }; }
-
-    outputEl.textContent = parsed.sql || "";
-    if (parsed.explanation) {
-      expEl.style.display = "block";
-      expEl.textContent = "💡 " + parsed.explanation;
-    }
-  } catch(err) {
-    outputEl.innerHTML = `<span style="color:var(--red)">❌ Lỗi kết nối: ${err.message}</span>`;
-  }
-
-  btn.disabled = false;
-  btn.textContent = "Sinh SQL ↗";
+function saveSchema(){
+  const name=document.getElementById("saveName").value.trim();
+  if(!name){alert("Vui lòng đặt tên cho schema");return;}
+  const snapshot=tables.map(t=>({name:t.name,columns:t.columns.map(c=>({name:c.name,type:c.type}))}));
+  const saved=getSaved();
+  // Nếu tên đã tồn tại thì ghi đè
+  const existIdx=saved.findIndex(s=>s.name===name);
+  if(existIdx>=0){saved[existIdx]={name,tables:snapshot};}
+  else{saved.push({name,tables:snapshot});}
+  setSaved(saved);
+  document.getElementById("saveName").value="";
+  renderSaved();
+  showToast("Đã lưu schema: "+name);
 }
 
-function copySQL() {
-  const text = document.getElementById("sqlOutput").textContent;
-  if (!text || text.includes("hiển thị ở đây")) return;
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById("copyBtn");
-    btn.textContent = "✓";
-    setTimeout(() => btn.textContent = "📋", 1500);
+function loadSchema(idx){
+  const saved=getSaved();
+  const s=saved[idx];if(!s)return;
+  tables=[];tidx=0;
+  s.tables.forEach(td=>{
+    const t=makeTable();
+    t.name=td.name;
+    t.tab="manual";
+    td.columns.forEach(c=>{t.columns.push({id:Date.now()+Math.random(),name:c.name,type:c.type});});
+    tables.push(t);
   });
+  renderAll();
+  showToast("Đã tải schema: "+s.name);
 }
 
-switchTab("import");
+function deleteSchema(idx){
+  const saved=getSaved();
+  saved.splice(idx,1);
+  setSaved(saved);
+  renderSaved();
+}
+
+function showToast(msg){
+  let t=document.getElementById("toast");
+  if(!t){t=document.createElement("div");t.id="toast";t.style.cssText="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;font-size:13px;padding:8px 18px;border-radius:20px;z-index:9999;transition:opacity .3s";document.body.appendChild(t);}
+  t.textContent=msg;t.style.opacity="1";
+  clearTimeout(t._timer);t._timer=setTimeout(()=>t.style.opacity="0",2500);
+}
+
+// ---- Tables ----
+function makeTable(){return{id:++tidx,name:"",columns:[],open:true,tab:"import",workbook:null,importMsg:null};}
+function addTable(){tables.push(makeTable());renderAll();}
+function removeTable(id){if(tables.length<=1)return;tables=tables.filter(t=>t.id!==id);renderAll();}
+function toggleTable(id){const t=tables.find(t=>t.id===id);if(t)t.open=!t.open;renderAll();}
+
+function renderAll(){
+  document.getElementById("tableCount").textContent=tables.length+" bảng";
+  const list=document.getElementById("tableList");
+  list.innerHTML="";
+  tables.forEach((t,i)=>list.appendChild(buildBlock(t,i)));
+  renderSaved();
+  // Show config notice if worker url not set
+  document.getElementById("configNotice").style.display=
+    WORKER_URL==="REPLACE_WITH_YOUR_WORKER_URL"?"block":"none";
+}
+
+function buildBlock(t,idx){
+  const div=document.createElement("div");
+  div.className="table-block";div.id="tb-"+t.id;
+  const dname=t.name||"Bảng "+(idx+1)+" (chưa đặt tên)";
+  div.innerHTML=`
+    <div class="table-block-header" onclick="toggleTable(${t.id})">
+      <div class="table-num">${idx+1}</div>
+      <div class="table-name-display ${t.name?"":"empty"}">${esc(dname)}</div>
+      ${t.columns.length?`<span class="badge" style="font-size:10px">${t.columns.length} cột</span>`:""}
+      ${tables.length>1?`<button class="btn-icon" onclick="event.stopPropagation();removeTable(${t.id})" style="color:var(--red);border:none">✕</button>`:""}
+      <span class="chevron ${t.open?"open":""}">▼</span>
+    </div>
+    <div class="table-block-body ${t.open?"open":""}">
+      <label>Tên bảng</label>
+      <input type="text" placeholder="vd: project.dataset.table" value="${esc(t.name)}" oninput="updName(${t.id},this.value)" style="margin-bottom:14px">
+      <div class="tabs">
+        <button class="tab ${t.tab==="import"?"active":""}" onclick="switchTab(${t.id},'import')">📊 Import Excel</button>
+        <button class="tab ${t.tab==="manual"?"active":""}" onclick="switchTab(${t.id},'manual')">✏️ Thủ công</button>
+      </div>
+      ${t.tab==="import"?`
+        <div class="drop-zone" id="dz-${t.id}" onclick="document.getElementById('fi-${t.id}').click()" ondragover="dzOver(event,${t.id})" ondragleave="dzLeave(${t.id})" ondrop="dzDrop(event,${t.id})">
+          <p>Kéo thả file vào đây hoặc <strong>click để chọn</strong></p>
+          <small>.xlsx · .xls · .csv</small>
+        </div>
+        <input type="file" id="fi-${t.id}" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFile(event,${t.id})">
+        ${t.importMsg?`<div class="notice" style="color:${t.importMsg.color};background:${t.importMsg.bg}">${esc(t.importMsg.text)}</div>`:""}
+        ${t.workbook&&t.workbook.SheetNames.length>1?`<div style="margin-bottom:8px"><label>Chọn sheet</label><select onchange="loadSheet(${t.id},this.value)">${t.workbook.SheetNames.map(n=>`<option>${esc(n)}</option>`).join("")}</select></div>`:""}
+      `:""}
+      ${t.columns.length?`
+        <div class="schema-header"><span>Tên cột</span><span>Kiểu BQ</span><span></span></div>
+        ${t.columns.map(c=>`
+          <div class="schema-row-grid">
+            <input type="text" placeholder="tên_cột" value="${esc(c.name)}" oninput="updCol(${t.id},${c.id},'name',this.value)">
+            <select onchange="updCol(${t.id},${c.id},'type',this.value)">${BQ_TYPES.map(tp=>`<option${tp===c.type?" selected":""}>${tp}</option>`).join("")}</select>
+            <button class="btn-icon" onclick="rmCol(${t.id},${c.id})" style="color:var(--red);border:none">✕</button>
+          </div>`).join("")}
+      `:""}
+      <button class="btn" style="margin-top:8px;font-size:12px" onclick="addCol(${t.id})">+ Thêm cột</button>
+    </div>`;
+  return div;
+}
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function updName(id,v){const t=tables.find(t=>t.id===id);if(t)t.name=v;renderAll();}
+function switchTab(id,tab){const t=tables.find(t=>t.id===id);if(t){t.tab=tab;renderAll();}}
+function dzOver(e,id){e.preventDefault();document.getElementById("dz-"+id)?.classList.add("drag-over");}
+function dzLeave(id){document.getElementById("dz-"+id)?.classList.remove("drag-over");}
+function dzDrop(e,id){e.preventDefault();dzLeave(id);const f=e.dataTransfer.files[0];if(f)processFile(f,id);}
+function handleFile(e,id){const f=e.target.files[0];if(f)processFile(f,id);}
+
+function processFile(file,id){
+  const r=new FileReader();
+  r.onload=function(e){
+    try{
+      const t=tables.find(t=>t.id===id);if(!t)return;
+      t.workbook=XLSX.read(new Uint8Array(e.target.result),{type:"array"});
+      loadSheet(id,t.workbook.SheetNames[0]);
+      t.importMsg={text:"✓ "+file.name+" — đã tải lên",color:"var(--green)",bg:"var(--green-light)"};
+      renderAll();
+    }catch(err){const t=tables.find(t=>t.id===id);if(t){t.importMsg={text:"❌ "+err.message,color:"var(--red)",bg:"var(--red-light)"};renderAll();}}
+  };
+  r.readAsArrayBuffer(file);
+}
+
+function loadSheet(id,sn){
+  const t=tables.find(t=>t.id===id);if(!t||!t.workbook)return;
+  const json=XLSX.utils.sheet_to_json(t.workbook.Sheets[sn],{header:1,defval:""});
+  if(!json.length)return;
+  const hdrs=json[0].map(h=>String(h).trim()).filter(Boolean);
+  const rows=json.slice(1);
+  let cid=Date.now();
+  t.columns=hdrs.map((name,i)=>({id:cid++,name,type:inferType(rows.map(r=>r[i]))}));
+  renderAll();
+}
+
+function inferType(vals){
+  const s=vals.filter(v=>v!=null&&v!=="");
+  if(!s.length)return"STRING";
+  if(s.every(v=>!isNaN(Number(v))))return s.every(v=>Number.isInteger(Number(v)))?"INT64":"FLOAT64";
+  if(s.every(v=>/^\d{4}-\d{2}-\d{2}$/.test(String(v))))return"DATE";
+  if(s.every(v=>/^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}/.test(String(v))))return"TIMESTAMP";
+  if(s.every(v=>["true","false","1","0","yes","no"].includes(String(v).toLowerCase())))return"BOOL";
+  return"STRING";
+}
+
+function addCol(tid){const t=tables.find(t=>t.id===tid);if(t){t.columns.push({id:Date.now()+Math.random(),name:"",type:"STRING"});renderAll();}}
+function rmCol(tid,cid){const t=tables.find(t=>t.id===tid);if(t){t.columns=t.columns.filter(c=>c.id!==cid);renderAll();}}
+function updCol(tid,cid,f,v){const t=tables.find(t=>t.id===tid);if(t){const c=t.columns.find(c=>c.id===cid);if(c)c[f]=v;}}
+
+// ---- Generate SQL ----
+async function generateSQL(){
+  const req=document.getElementById("queryReq").value.trim();
+  const btn=document.getElementById("generateBtn");
+  const out=document.getElementById("sqlOutput");
+  const exp=document.getElementById("explanation");
+
+  if(WORKER_URL==="REPLACE_WITH_YOUR_WORKER_URL"){
+    out.innerHTML='<span style="color:var(--red)">⚠ Chưa cấu hình Worker URL. Xem hướng dẫn bên dưới.</span>';return;
+  }
+  const vt=tables.filter(t=>t.name&&t.columns.length>0);
+  if(!vt.length){out.innerHTML='<span style="color:var(--red)">⚠ Cần ít nhất 1 bảng có tên và cột</span>';return;}
+  if(!req){out.innerHTML='<span style="color:var(--red)">⚠ Vui lòng nhập yêu cầu truy vấn</span>';return;}
+
+  btn.disabled=true;btn.textContent="Đang xử lý...";
+  out.innerHTML='<div class="dots"><span></span><span></span><span></span></div>';
+  exp.style.display="none";
+
+  const schemas=vt.map((t,i)=>`Bảng ${i+1}: \`${t.name}\`\n  Cột:\n${t.columns.map(c=>`    ${c.name||"(unnamed)"} ${c.type}`).join(",\n")}`).join("\n\n");
+  const joinHint=vt.length>1?`\nCó ${vt.length} bảng — xác định quan hệ từ tên cột và dùng JOIN phù hợp. Đặt alias cho bảng.`:"";
+  const prompt=`Bạn là chuyên gia Google BigQuery SQL.${joinHint}\n\nSCHEMA:\n${schemas}\n\nYÊU CẦU: ${req}\n\nTrả về JSON duy nhất:\n{"sql":"câu SQL đầy đủ","explanation":"giải thích ngắn tiếng Việt 2-4 câu, nêu rõ loại JOIN nếu có"}\n\nDùng cú pháp BigQuery chuẩn, backtick khi cần.`;
+
+  try{
+    const resp=await fetch(WORKER_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1500,messages:[{role:"user",content:prompt}]})});
+    if(!resp.ok){const e=await resp.json().catch(()=>({error:{message:resp.statusText}}));out.innerHTML=`<span style="color:var(--red)">❌ ${e.error?.message||resp.status}</span>`;return;}
+    const data=await resp.json();
+    const text=data.content.map(i=>i.text||"").join("");
+    const clean=text.replace(/```json|```/g,"").trim();
+    let parsed;try{parsed=JSON.parse(clean);}catch{parsed={sql:clean,explanation:""};}
+    out.textContent=parsed.sql||"";
+    if(parsed.explanation){exp.style.display="block";exp.textContent="💡 "+parsed.explanation;}
+  }catch(err){out.innerHTML=`<span style="color:var(--red)">❌ ${err.message}</span>`;}
+  btn.disabled=false;btn.textContent="Sinh SQL ↗";
+}
+
+function copySQL(){
+  const text=document.getElementById("sqlOutput").textContent;
+  if(!text||text.includes("hiển thị ở đây"))return;
+  navigator.clipboard.writeText(text).then(()=>{const b=document.getElementById("copyBtn");b.textContent="✓";setTimeout(()=>b.textContent="📋",1500);});
+}
+
+addTable();
+renderSaved();
 </script>
 </body>
 </html>

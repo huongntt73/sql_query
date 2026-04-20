@@ -23,78 +23,75 @@
       --text:#f0f0f0;--text2:#aaa;--text3:#666;
       --blue-light:#0C447C40;--green-light:#3B6D1130;--red-light:#A32D2D30;--amber-light:#854F0B30;
     }}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1rem;}
-    .container{max-width:720px;margin:0 auto;}
-    header{margin-bottom:1.75rem;}
-    header h1{font-size:22px;font-weight:600;margin-bottom:4px;}
-    header p{font-size:14px;color:var(--text2);}
-    .card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;}
-    .card-title{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1rem;}
-    label{display:block;font-size:13px;color:var(--text2);margin-bottom:5px;}
-    input,select,textarea{font-family:inherit;font-size:14px;color:var(--text);background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--rs);padding:8px 12px;width:100%;outline:none;transition:border-color .15s,box-shadow .15s;}
-    input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24,95,165,.1);}
-    select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px;appearance:none;}
-    textarea{resize:vertical;min-height:90px;line-height:1.6;}
-    .btn{font-family:inherit;font-size:13px;font-weight:500;padding:7px 14px;border-radius:var(--rs);border:0.5px solid var(--border2);background:transparent;color:var(--text);cursor:pointer;transition:background .15s;white-space:nowrap;}
-    .btn:hover{background:var(--surface2);}
-    .btn:disabled{opacity:.45;cursor:not-allowed;}
-    .btn-primary{background:var(--blue);color:#fff;border-color:var(--blue);font-size:14px;padding:10px 24px;}
-    .btn-primary:hover{background:var(--blue-dark);border-color:var(--blue-dark);}
-    .btn-icon{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border:0.5px solid var(--border);border-radius:var(--rs);background:transparent;cursor:pointer;font-size:13px;color:var(--text2);transition:background .15s;font-family:inherit;flex-shrink:0;}
-    .btn-icon:hover{background:var(--surface2);}
-    .badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 9px;border-radius:20px;background:var(--blue-light);color:var(--blue);}
-    .badge-green{background:var(--green-light);color:var(--green);}
-    .badge-amber{background:var(--amber-light);color:var(--amber);}
-    .flex{display:flex;align-items:center;gap:8px;}
-    .spacer{flex:1;}
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:2rem 1rem; }
+    .container { max-width:720px; margin:0 auto; }
+    header { margin-bottom:1.75rem; }
+    header h1 { font-size:22px; font-weight:600; margin-bottom:4px; }
+    header p { font-size:14px; color:var(--text2); }
+    .card { background:var(--surface); border:0.5px solid var(--border); border-radius:var(--r); padding:1.25rem; margin-bottom:1rem; }
+    .card-title { font-size:11px; font-weight:600; color:var(--text2); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:1rem; }
+    label { display:block; font-size:13px; color:var(--text2); margin-bottom:5px; }
+    input,select,textarea { font-family:inherit; font-size:14px; color:var(--text); background:var(--surface2); border:0.5px solid var(--border2); border-radius:var(--rs); padding:8px 12px; width:100%; outline:none; transition:border-color .15s,box-shadow .15s; }
+    input:focus,select:focus,textarea:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(24,95,165,.1); }
+    select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; padding-right:30px; appearance:none; }
+    textarea { resize:vertical; min-height:90px; line-height:1.6; }
+    .btn { font-family:inherit; font-size:13px; font-weight:500; padding:7px 14px; border-radius:var(--rs); border:0.5px solid var(--border2); background:transparent; color:var(--text); cursor:pointer; transition:background .15s; white-space:nowrap; }
+    .btn:hover { background:var(--surface2); }
+    .btn:disabled { opacity:.45; cursor:not-allowed; }
+    .btn-primary { background:var(--blue); color:#fff; border-color:var(--blue); font-size:14px; padding:10px 24px; }
+    .btn-primary:hover { background:var(--blue-dark); border-color:var(--blue-dark); }
+    .btn-icon { width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center; border:0.5px solid var(--border); border-radius:var(--rs); background:transparent; cursor:pointer; font-size:13px; color:var(--text2); transition:background .15s; font-family:inherit; flex-shrink:0; }
+    .btn-icon:hover { background:var(--surface2); }
+    .badge { display:inline-block; font-size:11px; font-weight:500; padding:2px 9px; border-radius:20px; background:var(--blue-light); color:var(--blue); }
+    .badge-green { background:var(--green-light); color:var(--green); }
+    .badge-amber { background:var(--amber-light); color:var(--amber); }
+    .flex { display:flex; align-items:center; gap:8px; }
+    .spacer { flex:1; }
 
     /* Saved schemas */
-    .saved-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
-    .saved-chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:4px 10px;border-radius:20px;border:0.5px solid var(--border2);background:var(--surface2);cursor:pointer;transition:all .15s;}
-    .saved-chip:hover{border-color:var(--blue);color:var(--blue);}
-    .saved-chip .chip-del{font-size:10px;color:var(--text3);margin-left:2px;}
-    .saved-chip .chip-del:hover{color:var(--red);}
-    .save-row{display:flex;gap:6px;align-items:center;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border);}
-    .save-row input{font-size:13px;padding:6px 10px;}
+    .saved-list { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; min-height:24px; }
+    .chip { display:inline-flex; align-items:center; gap:5px; font-size:12px; padding:4px 10px; border-radius:20px; border:0.5px solid var(--border2); background:var(--surface2); cursor:pointer; color:var(--text); transition:all .15s; }
+    .chip:hover { border-color:var(--blue); color:var(--blue); }
+    .chip-del { font-size:10px; color:var(--text3); }
+    .chip-del:hover { color:var(--red); }
+    .save-row { display:flex; gap:6px; align-items:center; margin-top:10px; padding-top:10px; border-top:0.5px solid var(--border); }
 
     /* Table blocks */
-    .table-block{border:0.5px solid var(--border2);border-radius:var(--r);margin-bottom:12px;overflow:hidden;}
-    .table-block-header{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--surface2);border-bottom:0.5px solid var(--border);cursor:pointer;user-select:none;}
-    .table-block-header:hover{background:var(--bg);}
-    .table-num{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-    .table-name-display{font-size:14px;font-weight:500;flex:1;}
-    .table-name-display.empty{color:var(--text3);font-style:italic;}
-    .chevron{font-size:10px;color:var(--text3);transition:transform .2s;}
-    .chevron.open{transform:rotate(180deg);}
-    .table-block-body{padding:14px;display:none;}
-    .table-block-body.open{display:block;}
-    .schema-header,.schema-row-grid{display:grid;grid-template-columns:1fr 150px 30px;gap:6px;align-items:center;margin-bottom:5px;}
-    .schema-header span{font-size:12px;color:var(--text3);}
-    .tabs{display:flex;gap:4px;margin-bottom:12px;}
-    .tab{font-family:inherit;font-size:12px;padding:6px 14px;border-radius:var(--rs);border:0.5px solid var(--border);cursor:pointer;background:transparent;color:var(--text2);transition:all .15s;}
-    .tab.active{background:var(--blue);color:#fff;border-color:var(--blue);}
-    .drop-zone{border:1.5px dashed var(--border2);border-radius:var(--rs);padding:18px;text-align:center;cursor:pointer;transition:all .15s;background:var(--surface2);margin-bottom:8px;}
-    .drop-zone:hover,.drop-zone.drag-over{border-color:var(--blue);background:var(--blue-light);}
-    .drop-zone p{font-size:13px;color:var(--text2);margin-bottom:3px;}
-    .drop-zone small{font-size:12px;color:var(--text3);}
-    .notice{font-size:12px;padding:6px 10px;border-radius:var(--rs);margin-bottom:8px;}
+    .table-block { border:0.5px solid var(--border2); border-radius:var(--r); margin-bottom:10px; overflow:hidden; }
+    .tb-header { display:flex; align-items:center; gap:8px; padding:10px 14px; background:var(--surface2); border-bottom:0.5px solid var(--border); cursor:pointer; user-select:none; }
+    .tb-header:hover { background:var(--bg); }
+    .tb-num { width:22px; height:22px; border-radius:50%; background:var(--blue); color:#fff; font-size:11px; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .tb-name { font-size:14px; font-weight:500; flex:1; }
+    .tb-name.empty { color:var(--text3); font-style:italic; }
+    .chevron { font-size:10px; color:var(--text3); transition:transform .2s; display:inline-block; }
+    .chevron.open { transform:rotate(180deg); }
+    .tb-body { padding:14px; display:none; }
+    .tb-body.open { display:block; }
+    .tabs { display:flex; gap:4px; margin-bottom:12px; }
+    .tab { font-family:inherit; font-size:12px; padding:6px 14px; border-radius:var(--rs); border:0.5px solid var(--border); cursor:pointer; background:transparent; color:var(--text2); transition:all .15s; }
+    .tab.active { background:var(--blue); color:#fff; border-color:var(--blue); }
+    .drop-zone { border:1.5px dashed var(--border2); border-radius:var(--rs); padding:18px; text-align:center; cursor:pointer; transition:all .15s; background:var(--surface2); margin-bottom:8px; }
+    .drop-zone:hover, .drop-zone.drag-over { border-color:var(--blue); background:var(--blue-light); }
+    .drop-zone p { font-size:13px; color:var(--text2); margin-bottom:3px; }
+    .drop-zone small { font-size:12px; color:var(--text3); }
+    .notice { font-size:12px; padding:6px 10px; border-radius:var(--rs); margin-bottom:8px; }
+    .schema-hdr, .schema-row { display:grid; grid-template-columns:1fr 150px 30px; gap:6px; align-items:center; margin-bottom:5px; }
+    .schema-hdr span { font-size:12px; color:var(--text3); }
+    .add-table-btn { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--blue); background:none; border:1.5px dashed var(--border2); border-radius:var(--r); padding:10px 16px; cursor:pointer; font-family:inherit; transition:all .15s; width:100%; justify-content:center; margin-bottom:2px; }
+    .add-table-btn:hover { border-color:var(--blue); background:var(--blue-light); }
 
     /* Output */
-    .output-box{background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--rs);padding:1rem;font-family:"SF Mono","Fira Code",monospace;font-size:13px;line-height:1.75;white-space:pre-wrap;word-break:break-word;min-height:64px;}
-    .empty-state{color:var(--text3);font-style:italic;font-size:13px;font-family:inherit;}
-    .explanation{font-size:13px;color:var(--text2);line-height:1.6;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border);}
-    .dots{display:inline-flex;gap:4px;align-items:center;}
-    .dots span{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:blink 1.2s infinite;}
-    .dots span:nth-child(2){animation-delay:.2s}.dots span:nth-child(3){animation-delay:.4s}
+    .output-box { background:var(--surface2); border:0.5px solid var(--border); border-radius:var(--rs); padding:1rem; font-family:"SF Mono","Fira Code",monospace; font-size:13px; line-height:1.75; white-space:pre-wrap; word-break:break-word; min-height:64px; }
+    .empty-state { color:var(--text3); font-style:italic; font-size:13px; font-family:inherit; }
+    .explanation { font-size:13px; color:var(--text2); line-height:1.6; margin-top:10px; padding-top:10px; border-top:0.5px solid var(--border); }
+    .dots { display:inline-flex; gap:4px; align-items:center; }
+    .dots span { width:5px; height:5px; border-radius:50%; background:var(--blue); animation:blink 1.2s infinite; }
+    .dots span:nth-child(2){animation-delay:.2s} .dots span:nth-child(3){animation-delay:.4s}
     @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
 
-    .add-table-btn{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--blue);background:none;border:1.5px dashed var(--border2);border-radius:var(--r);padding:10px 16px;cursor:pointer;font-family:inherit;transition:all .15s;width:100%;justify-content:center;margin-bottom:4px;}
-    .add-table-btn:hover{border-color:var(--blue);background:var(--blue-light);}
-
-    /* Config notice */
-    .config-notice{background:var(--amber-light);border:0.5px solid var(--amber);border-radius:var(--rs);padding:10px 14px;font-size:13px;color:var(--amber);margin-bottom:1rem;display:none;}
-
-    footer{text-align:center;font-size:12px;color:var(--text3);margin-top:2rem;}
+    .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#1a1a1a; color:#fff; font-size:13px; padding:8px 18px; border-radius:20px; opacity:0; transition:opacity .3s; pointer-events:none; white-space:nowrap; z-index:9999; }
+    .toast.show { opacity:1; }
+    footer { text-align:center; font-size:12px; color:var(--text3); margin-top:2rem; }
   </style>
 </head>
 <body>
@@ -104,10 +101,6 @@
     <p>Định nghĩa schema nhiều bảng → Mô tả yêu cầu → Nhận SQL BigQuery với JOIN tự động</p>
   </header>
 
-  <div class="config-notice" id="configNotice">
-    ⚠ Chưa cấu hình Worker URL. Mở file <code>index.html</code>, tìm dòng <code>WORKER_URL</code> và thay bằng URL Cloudflare Worker của bạn.
-  </div>
-
   <!-- Saved schemas -->
   <div class="card">
     <div class="flex" style="margin-bottom:10px">
@@ -115,11 +108,9 @@
       <span class="spacer"></span>
       <span style="font-size:12px;color:var(--text3)" id="savedCount">0 schema</span>
     </div>
-    <div class="saved-list" id="savedList">
-      <span style="font-size:13px;color:var(--text3);font-style:italic">Chưa có schema nào được lưu</span>
-    </div>
+    <div class="saved-list" id="savedList"><span style="font-size:13px;color:var(--text3);font-style:italic">Chưa có schema nào</span></div>
     <div class="save-row">
-      <input type="text" id="saveName" placeholder="Đặt tên schema hiện tại... vd: Bảng Orders + Customers" style="flex:1">
+      <input type="text" id="saveName" placeholder="Đặt tên schema... vd: Orders + Customers" style="flex:1">
       <button class="btn" onclick="saveSchema()">💾 Lưu</button>
     </div>
   </div>
@@ -138,7 +129,7 @@
   <!-- Query -->
   <div class="card">
     <div class="card-title">Yêu cầu truy vấn</div>
-    <textarea id="queryReq" placeholder="vd: Lấy danh sách khách hàng cùng tổng đơn hàng, chỉ lấy khách có tổng tiền trên 1 triệu trong năm 2024..."></textarea>
+    <textarea id="queryReq" placeholder="vd: Lấy danh sách khách hàng cùng tổng đơn hàng, chỉ khách có tổng tiền trên 1 triệu trong năm 2024..."></textarea>
     <div class="flex" style="margin-top:12px;justify-content:flex-end">
       <button class="btn btn-primary" id="generateBtn" onclick="generateSQL()">Sinh SQL ↗</button>
     </div>
@@ -158,149 +149,169 @@
 
   <footer>Powered by Claude (Anthropic) · BigQuery SQL Generator</footer>
 </div>
+<div class="toast" id="toast"></div>
 
 <script>
-// ============================================================
-// CẤU HÌNH — thay WORKER_URL bằng URL Cloudflare Worker của bạn
-// Ví dụ: "https://bq-proxy.ten-ban.workers.dev"
-const WORKER_URL = "https://createsql.huongnguyentt06.workers.dev/";
-// ============================================================
-
+const API_KEY = "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";
 const BQ_TYPES=["STRING","INT64","FLOAT64","NUMERIC","BOOL","DATE","DATETIME","TIMESTAMP","BYTES","ARRAY<STRING>","JSON","STRUCT"];
-const LS_KEY = "bq_saved_schemas";
-let tables=[], tidx=0;
+const LS_SCHEMA="bq_schemas_v2";
+let tables=[],uidC=0;
 
-// ---- Saved schemas ----
-function getSaved(){try{return JSON.parse(localStorage.getItem(LS_KEY)||"[]");}catch{return[];}}
-function setSaved(arr){localStorage.setItem(LS_KEY,JSON.stringify(arr));}
+function uid(){return"u"+(++uidC)+Date.now()}
 
+function toast(msg){
+  const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");
+  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("show"),2500);
+}
+
+/* ---- Saved Schemas ---- */
+function getSaved(){try{return JSON.parse(localStorage.getItem(LS_SCHEMA)||"[]")}catch{return[]}}
+function setSaved(a){localStorage.setItem(LS_SCHEMA,JSON.stringify(a))}
 function renderSaved(){
   const saved=getSaved();
+  document.getElementById("savedCount").textContent=saved.length+" schema";
   const list=document.getElementById("savedList");
-  const cnt=document.getElementById("savedCount");
-  cnt.textContent=saved.length+" schema";
-  if(!saved.length){
-    list.innerHTML='<span style="font-size:13px;color:var(--text3);font-style:italic">Chưa có schema nào được lưu</span>';
-    return;
-  }
-  list.innerHTML=saved.map((s,i)=>`
-    <div class="saved-chip" onclick="loadSchema(${i})">
-      📋 ${esc(s.name)}
-      <span class="chip-del" onclick="event.stopPropagation();deleteSchema(${i})">✕</span>
-    </div>`).join("");
+  if(!saved.length){list.innerHTML='<span style="font-size:13px;color:var(--text3);font-style:italic">Chưa có schema nào</span>';return;}
+  list.innerHTML=saved.map((s,i)=>`<div class="chip" onclick="loadSchema(${i})">📋 ${esc(s.name)}<span class="chip-del" onclick="event.stopPropagation();delSchema(${i})"> ✕</span></div>`).join("");
 }
-
 function saveSchema(){
   const name=document.getElementById("saveName").value.trim();
-  if(!name){alert("Vui lòng đặt tên cho schema");return;}
-  const snapshot=tables.map(t=>({name:t.name,columns:t.columns.map(c=>({name:c.name,type:c.type}))}));
+  if(!name){toast("Vui lòng đặt tên schema");return;}
+  const snap=tables.map(t=>({name:t.name,columns:t.columns.map(c=>({name:c.name,type:c.type}))}));
   const saved=getSaved();
-  // Nếu tên đã tồn tại thì ghi đè
-  const existIdx=saved.findIndex(s=>s.name===name);
-  if(existIdx>=0){saved[existIdx]={name,tables:snapshot};}
-  else{saved.push({name,tables:snapshot});}
-  setSaved(saved);
-  document.getElementById("saveName").value="";
-  renderSaved();
-  showToast("Đã lưu schema: "+name);
+  const ei=saved.findIndex(s=>s.name===name);
+  if(ei>=0)saved[ei]={name,tables:snap};else saved.push({name,tables:snap});
+  setSaved(saved);document.getElementById("saveName").value="";renderSaved();toast("Đã lưu schema: "+name);
 }
-
 function loadSchema(idx){
-  const saved=getSaved();
-  const s=saved[idx];if(!s)return;
-  tables=[];tidx=0;
+  const s=getSaved()[idx];if(!s)return;
+  tables=[];
   s.tables.forEach(td=>{
-    const t=makeTable();
-    t.name=td.name;
-    t.tab="manual";
-    td.columns.forEach(c=>{t.columns.push({id:Date.now()+Math.random(),name:c.name,type:c.type});});
+    const t=makeTable();t.name=td.name;t.tab="manual";
+    td.columns.forEach(c=>t.columns.push({id:uid(),name:c.name,type:c.type}));
     tables.push(t);
   });
-  renderAll();
-  showToast("Đã tải schema: "+s.name);
+  rebuildAll();toast("Đã tải: "+s.name);
 }
+function delSchema(idx){const s=getSaved();s.splice(idx,1);setSaved(s);renderSaved();}
 
-function deleteSchema(idx){
-  const saved=getSaved();
-  saved.splice(idx,1);
-  setSaved(saved);
-  renderSaved();
-}
-
-function showToast(msg){
-  let t=document.getElementById("toast");
-  if(!t){t=document.createElement("div");t.id="toast";t.style.cssText="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;font-size:13px;padding:8px 18px;border-radius:20px;z-index:9999;transition:opacity .3s";document.body.appendChild(t);}
-  t.textContent=msg;t.style.opacity="1";
-  clearTimeout(t._timer);t._timer=setTimeout(()=>t.style.opacity="0",2500);
-}
-
-// ---- Tables ----
-function makeTable(){return{id:++tidx,name:"",columns:[],open:true,tab:"import",workbook:null,importMsg:null};}
-function addTable(){tables.push(makeTable());renderAll();}
-function removeTable(id){if(tables.length<=1)return;tables=tables.filter(t=>t.id!==id);renderAll();}
-function toggleTable(id){const t=tables.find(t=>t.id===id);if(t)t.open=!t.open;renderAll();}
-
-function renderAll(){
-  document.getElementById("tableCount").textContent=tables.length+" bảng";
+/* ---- Tables ---- */
+function makeTable(){return{id:uid(),name:"",columns:[],open:true,tab:"import",workbook:null,importMsg:null};}
+function addTable(){
+  const t=makeTable();tables.push(t);
   const list=document.getElementById("tableList");
-  list.innerHTML="";
-  tables.forEach((t,i)=>list.appendChild(buildBlock(t,i)));
-  renderSaved();
-  // Show config notice if worker url not set
-  document.getElementById("configNotice").style.display=
-    WORKER_URL==="https://createsql.huongnguyentt06.workers.dev/"?"block":"none";
+  const div=document.createElement("div");div.className="table-block";div.id="tb-"+t.id;
+  div.innerHTML=buildBlockHTML(t,tables.length-1);
+  list.appendChild(div);updateMeta();
 }
-
-function buildBlock(t,idx){
-  const div=document.createElement("div");
-  div.className="table-block";div.id="tb-"+t.id;
-  const dname=t.name||"Bảng "+(idx+1)+" (chưa đặt tên)";
-  div.innerHTML=`
-    <div class="table-block-header" onclick="toggleTable(${t.id})">
-      <div class="table-num">${idx+1}</div>
-      <div class="table-name-display ${t.name?"":"empty"}">${esc(dname)}</div>
-      ${t.columns.length?`<span class="badge" style="font-size:10px">${t.columns.length} cột</span>`:""}
-      ${tables.length>1?`<button class="btn-icon" onclick="event.stopPropagation();removeTable(${t.id})" style="color:var(--red);border:none">✕</button>`:""}
+function removeTable(id){
+  if(tables.length<=1)return;
+  tables=tables.filter(t=>t.id!==id);
+  document.getElementById("tb-"+id)?.remove();
+  renumber();updateMeta();
+}
+function toggleTable(id){
+  const t=tables.find(t=>t.id===id);if(!t)return;
+  t.open=!t.open;
+  document.querySelector("#tb-"+id+" .tb-body")?.classList.toggle("open",t.open);
+  document.querySelector("#tb-"+id+" .chevron")?.classList.toggle("open",t.open);
+}
+function updateMeta(){document.getElementById("tableCount").textContent=tables.length+" bảng";}
+function renumber(){
+  tables.forEach((t,i)=>{
+    const n=document.querySelector("#tb-"+t.id+" .tb-num");if(n)n.textContent=i+1;
+    const d=document.querySelector("#tb-"+t.id+" .tb-delbtn");if(d)d.style.display=tables.length>1?"flex":"none";
+  });
+}
+function rebuildAll(){
+  updateMeta();
+  const list=document.getElementById("tableList");list.innerHTML="";
+  tables.forEach((t,i)=>{
+    const div=document.createElement("div");div.className="table-block";div.id="tb-"+t.id;
+    div.innerHTML=buildBlockHTML(t,i);list.appendChild(div);
+  });
+  renderSaved();
+}
+function buildBlockHTML(t,idx){
+  return`
+    <div class="tb-header" onclick="toggleTable('${t.id}')">
+      <div class="tb-num">${idx+1}</div>
+      <div class="tb-name ${t.name?"":"empty"}" id="tbname-${t.id}">${esc(t.name||"Bảng "+(idx+1)+" (chưa đặt tên)")}</div>
+      <span class="badge" id="colbadge-${t.id}" style="font-size:10px;display:${t.columns.length?"inline-block":"none"}">${t.columns.length} cột</span>
+      <button class="btn-icon tb-delbtn" onclick="event.stopPropagation();removeTable('${t.id}')" style="color:var(--red);border:none;font-size:12px;display:${tables.length>1?"flex":"none"}">✕</button>
       <span class="chevron ${t.open?"open":""}">▼</span>
     </div>
-    <div class="table-block-body ${t.open?"open":""}">
+    <div class="tb-body ${t.open?"open":""}">
       <label>Tên bảng</label>
-      <input type="text" placeholder="vd: project.dataset.table" value="${esc(t.name)}" oninput="updName(${t.id},this.value)" style="margin-bottom:14px">
+      <input type="text" placeholder="vd: project.dataset.table" value="${esc(t.name)}"
+        onblur="updName('${t.id}',this.value)"
+        onkeydown="if(event.key==='Enter')this.blur()"
+        style="margin-bottom:14px">
       <div class="tabs">
-        <button class="tab ${t.tab==="import"?"active":""}" onclick="switchTab(${t.id},'import')">📊 Import Excel</button>
-        <button class="tab ${t.tab==="manual"?"active":""}" onclick="switchTab(${t.id},'manual')">✏️ Thủ công</button>
+        <button class="tab ${t.tab==="import"?"active":""}" onclick="switchTab('${t.id}','import')">📊 Import Excel</button>
+        <button class="tab ${t.tab==="manual"?"active":""}" onclick="switchTab('${t.id}','manual')">✏️ Thủ công</button>
       </div>
-      ${t.tab==="import"?`
-        <div class="drop-zone" id="dz-${t.id}" onclick="document.getElementById('fi-${t.id}').click()" ondragover="dzOver(event,${t.id})" ondragleave="dzLeave(${t.id})" ondrop="dzDrop(event,${t.id})">
-          <p>Kéo thả file vào đây hoặc <strong>click để chọn</strong></p>
-          <small>.xlsx · .xls · .csv</small>
-        </div>
-        <input type="file" id="fi-${t.id}" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFile(event,${t.id})">
-        ${t.importMsg?`<div class="notice" style="color:${t.importMsg.color};background:${t.importMsg.bg}">${esc(t.importMsg.text)}</div>`:""}
-        ${t.workbook&&t.workbook.SheetNames.length>1?`<div style="margin-bottom:8px"><label>Chọn sheet</label><select onchange="loadSheet(${t.id},this.value)">${t.workbook.SheetNames.map(n=>`<option>${esc(n)}</option>`).join("")}</select></div>`:""}
-      `:""}
-      ${t.columns.length?`
-        <div class="schema-header"><span>Tên cột</span><span>Kiểu BQ</span><span></span></div>
-        ${t.columns.map(c=>`
-          <div class="schema-row-grid">
-            <input type="text" placeholder="tên_cột" value="${esc(c.name)}" oninput="updCol(${t.id},${c.id},'name',this.value)">
-            <select onchange="updCol(${t.id},${c.id},'type',this.value)">${BQ_TYPES.map(tp=>`<option${tp===c.type?" selected":""}>${tp}</option>`).join("")}</select>
-            <button class="btn-icon" onclick="rmCol(${t.id},${c.id})" style="color:var(--red);border:none">✕</button>
-          </div>`).join("")}
-      `:""}
-      <button class="btn" style="margin-top:8px;font-size:12px" onclick="addCol(${t.id})">+ Thêm cột</button>
+      <div id="tabcontent-${t.id}">${buildTabContent(t)}</div>
+      <div id="schemacols-${t.id}">${buildSchemaRows(t)}</div>
+      <button class="btn" style="margin-top:8px;font-size:12px" onclick="addCol('${t.id}')">+ Thêm cột</button>
     </div>`;
-  return div;
 }
-
-function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
-function updName(id,v){const t=tables.find(t=>t.id===id);if(t)t.name=v;renderAll();}
-function switchTab(id,tab){const t=tables.find(t=>t.id===id);if(t){t.tab=tab;renderAll();}}
+function buildTabContent(t){
+  if(t.tab!=="import")return"";
+  return`
+    <div class="drop-zone" id="dz-${t.id}" onclick="document.getElementById('fi-${t.id}').click()" ondragover="dzOver(event,'${t.id}')" ondragleave="dzLeave('${t.id}')" ondrop="dzDrop(event,'${t.id}')">
+      <p>Kéo thả file vào đây hoặc <strong>click để chọn</strong></p>
+      <small>.xlsx · .xls · .csv</small>
+    </div>
+    <input type="file" id="fi-${t.id}" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFile(event,'${t.id}')">
+    ${t.importMsg?`<div class="notice" style="color:${t.importMsg.color};background:${t.importMsg.bg}">${esc(t.importMsg.text)}</div>`:""}
+    ${t.workbook&&t.workbook.SheetNames.length>1?`<div style="margin-bottom:8px"><label>Chọn sheet</label><select onchange="loadSheet('${t.id}',this.value)">${t.workbook.SheetNames.map(n=>`<option>${esc(n)}</option>`).join("")}</select></div>`:""}`;
+}
+function buildSchemaRows(t){
+  if(!t.columns.length)return"";
+  return`
+    <div class="schema-hdr" style="margin-top:10px"><span>Tên cột</span><span>Kiểu BQ</span><span></span></div>
+    ${t.columns.map(c=>`
+      <div class="schema-row">
+        <input type="text" placeholder="tên_cột" value="${esc(c.name)}"
+          onblur="updCol('${t.id}','${c.id}','name',this.value)"
+          onkeydown="if(event.key==='Enter')this.blur()">
+        <select onchange="updCol('${t.id}','${c.id}','type',this.value)">${BQ_TYPES.map(tp=>`<option${tp===c.type?" selected":""}>${tp}</option>`).join("")}</select>
+        <button class="btn-icon" onclick="rmCol('${t.id}','${c.id}')" style="color:var(--red);border:none;font-size:12px">✕</button>
+      </div>`).join("")}`;
+}
+function switchTab(id,tab){
+  const t=tables.find(t=>t.id===id);if(!t)return;t.tab=tab;
+  const body=document.querySelector("#tb-"+id+" .tb-body");if(!body)return;
+  body.querySelectorAll(".tab").forEach((el,i)=>el.classList.toggle("active",(i===0&&tab==="import")||(i===1&&tab==="manual")));
+  document.getElementById("tabcontent-"+id).innerHTML=buildTabContent(t);
+}
+function updName(id,val){
+  const t=tables.find(t=>t.id===id);if(!t)return;t.name=val;
+  const el=document.getElementById("tbname-"+id);
+  if(el){el.textContent=val||"Bảng "+(tables.indexOf(t)+1)+" (chưa đặt tên)";el.classList.toggle("empty",!val);}
+}
+function updCol(tid,cid,field,val){
+  const t=tables.find(t=>t.id===tid);if(!t)return;
+  const c=t.columns.find(c=>c.id===cid);if(c)c[field]=val;
+}
+function addCol(tid){
+  const t=tables.find(t=>t.id===tid);if(!t)return;
+  t.columns.push({id:uid(),name:"",type:"STRING"});refreshCols(t);
+}
+function rmCol(tid,cid){
+  const t=tables.find(t=>t.id===tid);if(!t)return;
+  t.columns=t.columns.filter(c=>c.id!==cid);refreshCols(t);
+}
+function refreshCols(t){
+  const el=document.getElementById("schemacols-"+t.id);if(el)el.innerHTML=buildSchemaRows(t);
+  const b=document.getElementById("colbadge-"+t.id);
+  if(b){b.textContent=t.columns.length+" cột";b.style.display=t.columns.length?"inline-block":"none";}
+}
 function dzOver(e,id){e.preventDefault();document.getElementById("dz-"+id)?.classList.add("drag-over");}
 function dzLeave(id){document.getElementById("dz-"+id)?.classList.remove("drag-over");}
 function dzDrop(e,id){e.preventDefault();dzLeave(id);const f=e.dataTransfer.files[0];if(f)processFile(f,id);}
 function handleFile(e,id){const f=e.target.files[0];if(f)processFile(f,id);}
-
 function processFile(file,id){
   const r=new FileReader();
   r.onload=function(e){
@@ -308,79 +319,84 @@ function processFile(file,id){
       const t=tables.find(t=>t.id===id);if(!t)return;
       t.workbook=XLSX.read(new Uint8Array(e.target.result),{type:"array"});
       loadSheet(id,t.workbook.SheetNames[0]);
-      t.importMsg={text:"✓ "+file.name+" — đã tải lên",color:"var(--green)",bg:"var(--green-light)"};
-      renderAll();
-    }catch(err){const t=tables.find(t=>t.id===id);if(t){t.importMsg={text:"❌ "+err.message,color:"var(--red)",bg:"var(--red-light)"};renderAll();}}
-  };
-  r.readAsArrayBuffer(file);
+      t.importMsg={text:"✓ "+file.name,color:"var(--green)",bg:"var(--green-light)"};
+      document.getElementById("tabcontent-"+id).innerHTML=buildTabContent(t);
+    }catch(err){
+      const t=tables.find(t=>t.id===id);if(t){t.importMsg={text:"❌ "+err.message,color:"var(--red)",bg:"var(--red-light)"};document.getElementById("tabcontent-"+id).innerHTML=buildTabContent(t);}
+    }
+  };r.readAsArrayBuffer(file);
 }
-
 function loadSheet(id,sn){
   const t=tables.find(t=>t.id===id);if(!t||!t.workbook)return;
   const json=XLSX.utils.sheet_to_json(t.workbook.Sheets[sn],{header:1,defval:""});
   if(!json.length)return;
   const hdrs=json[0].map(h=>String(h).trim()).filter(Boolean);
-  const rows=json.slice(1);
-  let cid=Date.now();
-  t.columns=hdrs.map((name,i)=>({id:cid++,name,type:inferType(rows.map(r=>r[i]))}));
-  renderAll();
+  t.columns=hdrs.map((name,i)=>({id:uid(),name,type:inferType(json.slice(1).map(r=>r[i]))}));
+  refreshCols(t);
 }
-
 function inferType(vals){
   const s=vals.filter(v=>v!=null&&v!=="");
   if(!s.length)return"STRING";
   if(s.every(v=>!isNaN(Number(v))))return s.every(v=>Number.isInteger(Number(v)))?"INT64":"FLOAT64";
   if(s.every(v=>/^\d{4}-\d{2}-\d{2}$/.test(String(v))))return"DATE";
   if(s.every(v=>/^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}/.test(String(v))))return"TIMESTAMP";
-  if(s.every(v=>["true","false","1","0","yes","no"].includes(String(v).toLowerCase())))return"BOOL";
+  if(s.every(v=>["true","false","1","0"].includes(String(v).toLowerCase())))return"BOOL";
   return"STRING";
 }
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
-function addCol(tid){const t=tables.find(t=>t.id===tid);if(t){t.columns.push({id:Date.now()+Math.random(),name:"",type:"STRING"});renderAll();}}
-function rmCol(tid,cid){const t=tables.find(t=>t.id===tid);if(t){t.columns=t.columns.filter(c=>c.id!==cid);renderAll();}}
-function updCol(tid,cid,f,v){const t=tables.find(t=>t.id===tid);if(t){const c=t.columns.find(c=>c.id===cid);if(c)c[f]=v;}}
-
-// ---- Generate SQL ----
+/* ---- Generate SQL ---- */
 async function generateSQL(){
   const req=document.getElementById("queryReq").value.trim();
   const btn=document.getElementById("generateBtn");
   const out=document.getElementById("sqlOutput");
   const exp=document.getElementById("explanation");
-
-  if(WORKER_URL==="https://createsql.huongnguyentt06.workers.dev/"){
-    out.innerHTML='<span style="color:var(--red)">⚠ Chưa cấu hình Worker URL. Xem hướng dẫn bên dưới.</span>';return;
-  }
   const vt=tables.filter(t=>t.name&&t.columns.length>0);
-  if(!vt.length){out.innerHTML='<span style="color:var(--red)">⚠ Cần ít nhất 1 bảng có tên và cột</span>';return;}
-  if(!req){out.innerHTML='<span style="color:var(--red)">⚠ Vui lòng nhập yêu cầu truy vấn</span>';return;}
-
+  if(!vt.length){toast("Cần ít nhất 1 bảng có tên và cột");return;}
+  if(!req){toast("Vui lòng nhập yêu cầu truy vấn");return;}
   btn.disabled=true;btn.textContent="Đang xử lý...";
   out.innerHTML='<div class="dots"><span></span><span></span><span></span></div>';
   exp.style.display="none";
-
   const schemas=vt.map((t,i)=>`Bảng ${i+1}: \`${t.name}\`\n  Cột:\n${t.columns.map(c=>`    ${c.name||"(unnamed)"} ${c.type}`).join(",\n")}`).join("\n\n");
-  const joinHint=vt.length>1?`\nCó ${vt.length} bảng — xác định quan hệ từ tên cột và dùng JOIN phù hợp. Đặt alias cho bảng.`:"";
-  const prompt=`Bạn là chuyên gia Google BigQuery SQL.${joinHint}\n\nSCHEMA:\n${schemas}\n\nYÊU CẦU: ${req}\n\nTrả về JSON duy nhất:\n{"sql":"câu SQL đầy đủ","explanation":"giải thích ngắn tiếng Việt 2-4 câu, nêu rõ loại JOIN nếu có"}\n\nDùng cú pháp BigQuery chuẩn, backtick khi cần.`;
-
+  const joinHint=vt.length>1?`\nCó ${vt.length} bảng — xác định quan hệ từ tên cột, dùng JOIN phù hợp, đặt alias.`:"";
+  const prompt=`Bạn là chuyên gia Google BigQuery SQL.${joinHint}\n\nSCHEMA:\n${schemas}\n\nYÊU CẦU: ${req}\n\nTrả về JSON duy nhất (không markdown, không text thừa):\n{"sql":"câu SQL đầy đủ","explanation":"giải thích ngắn tiếng Việt 2-4 câu, nêu rõ loại JOIN nếu có"}\n\nDùng cú pháp BigQuery chuẩn, backtick khi cần.`;
   try{
-    const resp=await fetch(WORKER_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1500,messages:[{role:"user",content:prompt}]})});
-    if(!resp.ok){const e=await resp.json().catch(()=>({error:{message:resp.statusText}}));out.innerHTML=`<span style="color:var(--red)">❌ ${e.error?.message||resp.status}</span>`;return;}
+    const resp=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "x-api-key":API_KEY,
+        "anthropic-version":"2023-06-01",
+        "anthropic-dangerous-direct-browser-access":"true"
+      },
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1500,messages:[{role:"user",content:prompt}]})
+    });
+    if(!resp.ok){
+      const e=await resp.json().catch(()=>({error:{message:resp.statusText}}));
+      out.innerHTML=`<span style="color:var(--red)">❌ ${e.error?.message||resp.status}</span>`;
+      return;
+    }
     const data=await resp.json();
     const text=data.content.map(i=>i.text||"").join("");
     const clean=text.replace(/```json|```/g,"").trim();
     let parsed;try{parsed=JSON.parse(clean);}catch{parsed={sql:clean,explanation:""};}
     out.textContent=parsed.sql||"";
     if(parsed.explanation){exp.style.display="block";exp.textContent="💡 "+parsed.explanation;}
-  }catch(err){out.innerHTML=`<span style="color:var(--red)">❌ ${err.message}</span>`;}
+  }catch(err){
+    out.innerHTML=`<span style="color:var(--red)">❌ ${err.message}</span>`;
+  }
   btn.disabled=false;btn.textContent="Sinh SQL ↗";
 }
 
 function copySQL(){
   const text=document.getElementById("sqlOutput").textContent;
   if(!text||text.includes("hiển thị ở đây"))return;
-  navigator.clipboard.writeText(text).then(()=>{const b=document.getElementById("copyBtn");b.textContent="✓";setTimeout(()=>b.textContent="📋",1500);});
+  navigator.clipboard.writeText(text).then(()=>{
+    const b=document.getElementById("copyBtn");b.textContent="✓";setTimeout(()=>b.textContent="📋",1500);
+  });
 }
 
+/* ---- Init ---- */
 addTable();
 renderSaved();
 </script>

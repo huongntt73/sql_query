@@ -163,7 +163,7 @@
 // ============================================================
 // CẤU HÌNH — thay WORKER_URL bằng URL Cloudflare Worker của bạn
 // Ví dụ: "https://bq-proxy.ten-ban.workers.dev"
-const WORKER_URL = "sqlquery.huongnguyentt06.workers.dev";
+const WORKER_URL = "https://createsql.huongnguyentt06.workers.dev/";
 // ============================================================
 
 const BQ_TYPES=["STRING","INT64","FLOAT64","NUMERIC","BOOL","DATE","DATETIME","TIMESTAMP","BYTES","ARRAY<STRING>","JSON","STRUCT"];
@@ -248,7 +248,7 @@ function renderAll(){
   renderSaved();
   // Show config notice if worker url not set
   document.getElementById("configNotice").style.display=
-    WORKER_URL==="sqlquery.huongnguyentt06.workers.dev"?"block":"none";
+    WORKER_URL==="https://createsql.huongnguyentt06.workers.dev/"?"block":"none";
 }
 
 function buildBlock(t,idx){
@@ -347,7 +347,7 @@ async function generateSQL(){
   const out=document.getElementById("sqlOutput");
   const exp=document.getElementById("explanation");
 
-  if(WORKER_URL==="sqlquery.huongnguyentt06.workers.dev"){
+  if(WORKER_URL==="https://createsql.huongnguyentt06.workers.dev/"){
     out.innerHTML='<span style="color:var(--red)">⚠ Chưa cấu hình Worker URL. Xem hướng dẫn bên dưới.</span>';return;
   }
   const vt=tables.filter(t=>t.name&&t.columns.length>0);
